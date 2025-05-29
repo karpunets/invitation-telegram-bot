@@ -8,7 +8,9 @@ import org.springframework.context.annotation.Configuration;
 @ConfigurationProperties(prefix = "telegram")
 @Data
 public class TelegramProperties {
+    private String bot;
     private String webhook;
     private String token;
+    private String notifyUserId;
 
 }

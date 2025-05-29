@@ -11,19 +11,22 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Optional;
+
 @RestController
 @AllArgsConstructor
 @Slf4j
 public class WebhookController {
     private final TelegramBot bot;
+    private final UpdateHandler updateHandler;
 
     @PostMapping("/")
     public void onUpdateReceived(@RequestBody String request) {
         log.info("Received update {}", request);
         Update update = BotUtils.parseUpdate(request);
-        Message message = update.message();
-        if (message == null) return;
-        SendMessage sendMessage = new SendMessage(message.chat().id(), message.text());
-        bot.execute(sendMessage);
+        updateHandler.handle(update);
+
+
+
     }
 }
