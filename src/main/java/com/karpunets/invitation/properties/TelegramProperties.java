@@ -12,5 +12,6 @@ public class TelegramProperties {
     private String webhook;
     private String token;
     private String notifyUserId;
+    private boolean removeWebhook = false;
 
 }

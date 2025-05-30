@@ -36,6 +36,9 @@ public class InvitationTelegramBot extends TelegramBot {
 
     @PreDestroy
     public void removeWebhook() {
+        if (!properties.isRemoveWebhook()) {
+            return;
+        }
         var response = execute(new DeleteWebhook());
         if (response.isOk()) {
             log.info("❎ Webhook removed");
